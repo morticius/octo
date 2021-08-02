@@ -3,7 +3,7 @@ package services
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/morticius/accuracy/internal/server/config"
+	"github.com/morticius/octo/internal/server/config"
 	"time"
 )
 

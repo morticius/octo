@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"context"
-	"github.com/morticius/accuracy/internal/models"
+	"github.com/morticius/octo/internal/models"
 )
 
 type IUserRepository interface {

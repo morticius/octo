@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/morticius/accuracy/internal/server/services"
+	"github.com/morticius/octo/internal/server/services"
 	"log"
 	"net/http"
 )

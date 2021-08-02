@@ -3,7 +3,7 @@ package services
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/morticius/accuracy/pkg/services"
+	"github.com/morticius/octo/pkg/services"
 	"log"
 	"net/http"
 )

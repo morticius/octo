@@ -2,8 +2,8 @@ package services
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/morticius/accuracy/internal/models"
-	"github.com/morticius/accuracy/internal/repositories"
+	"github.com/morticius/octo/internal/models"
+	"github.com/morticius/octo/internal/repositories"
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"

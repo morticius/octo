@@ -5,7 +5,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"github.com/morticius/accuracy/internal/models"
+	"github.com/morticius/octo/internal/models"
 	"io"
 	"io/ioutil"
 	"os"

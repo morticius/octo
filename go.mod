@@ -1,4 +1,4 @@
-module github.com/morticius/accuracy
+module github.com/morticius/octo
 
 go 1.16
 
