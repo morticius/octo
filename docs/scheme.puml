@@ -4,7 +4,10 @@ legend
 Render Aggregations: true
 Render Fields: true
 Render Methods: true
-Pritave Aggregations: false
+Pritave Aggregations: true
+
+<b><u>Notes</u></b>
+-show-options-as-note
 end legend
 namespace config {
     class Config << (S,Aquamarine) >> {
@@ -108,5 +111,8 @@ namespace services {
 
 "services.JWTService" <|-- "implements""services.jwtService"
 
+"services.AuthService""uses" o-- "repositories.IUserRepository"
+"services.AuthService""uses" o-- "services.JWTService"
+"services.RatesService""uses" o-- "services.BTCService"
 
 @enduml
