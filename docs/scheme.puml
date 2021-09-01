@@ -1,0 +1,112 @@
+@startuml
+legend
+<u><b>Legend</b></u>
+Render Aggregations: true
+Render Fields: true
+Render Methods: true
+Pritave Aggregations: false
+end legend
+namespace config {
+    class Config << (S,Aquamarine) >> {
+        + Addr string
+        + Secret string
+        + Issure string
+        + BtcRateEndpoint string
+
+    }
+}
+
+
+
+namespace file {
+    class UserFileRepository << (S,Aquamarine) >> {
+        - pathToSave string
+
+        - getPathToFileFromHash(hash string) string
+        - createFile(p string) (*os.File, error)
+
+        + GetByEmail(c context.Context, email string) (*models.User, error)
+        + Save(c context.Context, user models.User) error
+
+    }
+}
+
+"repositories.IUserRepository" <|-- "implements""file.UserFileRepository"
+
+
+namespace models {
+    class User << (S,Aquamarine) >> {
+        + Email string
+        + Password string
+
+    }
+}
+
+
+
+namespace repositories {
+    interface IUserRepository  {
+        + GetByEmail( context.Context,  string) (*models.User, error)
+        + Save( context.Context,  models.User) error
+
+    }
+    class MockUserRepository << (S,Aquamarine) >> {
+        + GetByEmail(ctx context.Context, s string) (*models.User, error)
+        + Save(ctx context.Context, user models.User) error
+
+    }
+}
+
+"repositories.IUserRepository" <|-- "implements""repositories.MockUserRepository"
+
+
+namespace services {
+    class AuthCredentials << (S,Aquamarine) >> {
+        + Email string
+        + Password string
+
+    }
+    class AuthService << (S,Aquamarine) >> {
+        - userRepository repositories.IUserRepository
+        - jwtService JWTService
+
+        + Create(c *gin.Context) 
+        + SignIn(c *gin.Context) 
+
+    }
+    class BTCService << (S,Aquamarine) >> {
+        + EndpointAPI string
+
+        + GetPriceBTCInUAH() (float64, error)
+
+    }
+    interface JWTService  {
+        + GenerateToken(email string) string
+        + ValidateToken(token string) (*jwt.Token, error)
+
+    }
+    class RatesService << (S,Aquamarine) >> {
+        - btcService *services.BTCService
+
+        + GetRateBTCToUAHHandler(c *gin.Context) 
+
+    }
+    class authCustomClaims << (S,Aquamarine) >> {
+        + Email string
+
+    }
+    class jwtService << (S,Aquamarine) >> {
+        - secretKey string
+        - issure string
+
+        + GenerateToken(email string) string
+        + ValidateToken(encodedToken string) (*jwt.Token, error)
+
+    }
+}
+"jwt.StandardClaims" *-- "extends""services.authCustomClaims"
+
+"services.JWTService" <|-- "implements""services.jwtService"
+
+
+@enduml
